@@ -135,4 +135,8 @@ public class Employee {
                 ", fullTime=" + fullTime +
                 '}';
     }
+
+    public Employee orElse(Object o) {
+        return null;
+    }
 }
