@@ -7,22 +7,6 @@ import sk.ukf.employees.service.EmployeeService;
 
 import java.util.List;
 
-//@RestController
-//@RequestMapping("/api")
-//public class EmployeeRestController {
-//    private EmployeeService employeeService;
-//
-//    @Autowired
-//    public EmployeeRestController(EmployeeService employeeService) {
-//        this.employeeService = employeeService;
-//    }
-//
-//    @GetMapping("/employees")
-//    public List<Employee> findAll() {
-//        return employeeService.findAll();
-//    }
-//}
-
 @RestController
 @RequestMapping("/api")
 public class EmployeeRestController {
