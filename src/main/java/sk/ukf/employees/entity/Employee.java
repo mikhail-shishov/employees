@@ -1,7 +1,7 @@
 package sk.ukf.employees.entity;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
@@ -12,42 +12,36 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank(message = "Pole nesmie byť prázdne")
     private String firstName;
+
+    @NotBlank(message = "Pole nesmie byť prázdne")
     private String lastName;
+
+    @NotNull(message = "Pole je povinné")
     private LocalDate birthDate;
+
+    @NotBlank(message = "Pole je povinné")
+    @Pattern(
+            regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+            message = "Neplatný formát emailu, skontrolujte ešte raz"
+    )
     private String email;
+
+    @Pattern(
+            regexp = "^\\+[0-9]{1,3}[0-9]{6,14}$",
+            message = "Telefónne číslo musí začínať +, obsahovať kód krajiny a 6–14 číslic"
+    )
     private String phone;
+
+    @NotBlank(message = "Pole je povinné")
     private String jobTitle;
+
+    @NotNull(message = "Pole je povinné")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Salary must be positive")
     private Double salary;
+
     private Boolean fullTime;
-
-    public Employee() {
-    }
-
-    public Employee(String firstName, String lastName, LocalDate birthDate, String email,
-                    String phone, String jobTitle, Double salary, Boolean fullTime) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.phone = phone;
-        this.jobTitle = jobTitle;
-        this.salary = salary;
-        this.fullTime = fullTime;
-    }
-
-    public Employee(int id, String firstName, String lastName, LocalDate birthDate, String email,
-                    String phone, String jobTitle, Double salary, Boolean fullTime) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.phone = phone;
-        this.jobTitle = jobTitle;
-        this.salary = salary;
-        this.fullTime = fullTime;
-    }
 
     public int getId() {
         return id;
@@ -119,24 +113,5 @@ public class Employee {
 
     public void setFullTime(Boolean fullTime) {
         this.fullTime = fullTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", jobTitle='" + jobTitle + '\'' +
-                ", salary=" + salary +
-                ", fullTime=" + fullTime +
-                '}';
-    }
-
-    public Employee orElse(Object o) {
-        return null;
     }
 }

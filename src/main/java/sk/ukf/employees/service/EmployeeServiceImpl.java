@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.ukf.employees.dao.EmployeeRepository;
 import sk.ukf.employees.entity.Employee;
+import sk.ukf.employees.exception.EmailAlreadyExistsException;
+import sk.ukf.employees.exception.ObjectNotFoundException;
 
 import java.util.List;
 
@@ -24,18 +26,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findById(int id) {
-        return employeeRepository.findById(id).orElse(null);
+        return employeeRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Employee", id));
     }
 
     @Override
     @Transactional
     public Employee save(Employee employee) {
+        employeeRepository.findByEmail(employee.getEmail()).filter(e -> e.getId() != employee.getId()).ifPresent(e -> {
+            throw new EmailAlreadyExistsException(employee.getEmail());
+        });
+
         return employeeRepository.save(employee);
     }
 
     @Override
     @Transactional
     public void deleteById(int id) {
+        if (!employeeRepository.existsById(id)) {
+            throw new ObjectNotFoundException("Employee", id);
+        }
         employeeRepository.deleteById(id);
     }
 }
