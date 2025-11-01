@@ -47,4 +47,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         employeeRepository.deleteById(id);
     }
+
+    @Override
+    public List<String> findAllJobTitles() {
+        return employeeRepository.findAllJobTitles();
+    }
 }

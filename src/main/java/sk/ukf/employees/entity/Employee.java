@@ -2,6 +2,8 @@ package sk.ukf.employees.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 @Entity
@@ -19,15 +21,19 @@ public class Employee {
     private String lastName;
 
     @NotNull(message = "Pole je povinné")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @NotBlank(message = "Pole je povinné")
+    @Size(max = 255, message = "Email môže mať najviac 255 znakov")
     @Pattern(
             regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
             message = "Neplatný formát emailu, skontrolujte ešte raz"
     )
     private String email;
 
+    @NotBlank(message = "Telefónne číslo je povinné")
+    @Size(max = 14, message = "Telefónne číslo môže mať najviac 20 znakov")
     @Pattern(
             regexp = "^\\+[0-9]{1,3}[0-9]{6,14}$",
             message = "Telefónne číslo musí začínať +, obsahovať kód krajiny a 6–14 číslic"
@@ -41,7 +47,8 @@ public class Employee {
     @DecimalMin(value = "0.0", inclusive = false, message = "Salary must be positive")
     private Double salary;
 
-    private Boolean fullTime;
+    @NotBlank(message = "Typ úvazku je povinný")
+    private String fullTime;
 
     public int getId() {
         return id;
@@ -107,11 +114,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Boolean getFullTime() {
+    public String getFullTime() {
         return fullTime;
     }
 
-    public void setFullTime(Boolean fullTime) {
+    public void setFullTime(String fullTime) {
         this.fullTime = fullTime;
     }
 }

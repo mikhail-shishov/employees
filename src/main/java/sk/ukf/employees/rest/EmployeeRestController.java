@@ -73,7 +73,7 @@ public class EmployeeRestController {
                 case "phone" -> existing.setPhone((String) value);
                 case "jobTitle" -> existing.setJobTitle((String) value);
                 case "salary" -> existing.setSalary(Double.valueOf(value.toString()));
-                case "fullTime" -> existing.setFullTime(Boolean.valueOf(value.toString()));
+                case "fullTime" -> existing.setFullTime((String) value);
             }
         });
 
