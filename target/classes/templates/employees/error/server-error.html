@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          crossorigin="anonymous">
+    <title>500 - Interná chyba servera</title>
+    <style>
+        body {
+            padding-top: 50px;
+        }
+
+        .error-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container error-container">
+    <div class="error-code text-warning">500</div>
+    <h1>Chyba na stráne servera</h1>
+    <p>Skúste ešte raz neskôr.</p>
+    <a href="/employees" class="btn btn-primary btn-lg">Späť na zoznam</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>

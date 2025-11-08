@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "employee")
@@ -14,37 +15,38 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "Pole nesmie byť prázdne")
+    @NotBlank(message = "Meno nesmie byť prázdne")
+    @Size(min = 2, max = 64, message = "Meno musí mať 2 až 64 znakov")
+    @Column(name = "first_name")
     private String firstName;
 
-    @NotBlank(message = "Pole nesmie byť prázdne")
+    @NotBlank(message = "Priezvisko nesmie byť prázdne")
+    @Size(min = 2, max = 64, message = "Priezvisko musí mať 2 až 64 znakov")
+    @Column(name = "last_name")
     private String lastName;
 
     @NotNull(message = "Pole je povinné")
+    @Past(message = "Dátum narodenia musí byť v minulosti")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
-    @NotBlank(message = "Pole je povinné")
-    @Size(max = 255, message = "Email môže mať najviac 255 znakov")
-    @Pattern(
-            regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
-            message = "Neplatný formát emailu, skontrolujte ešte raz"
-    )
+    @NotBlank(message = "Email nesmie byť prázdny")
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", message = "Email musí mať platný formát, napr. mail@example.com")
+    @Column(name = "email")
     private String email;
 
     @NotBlank(message = "Telefónne číslo je povinné")
     @Size(max = 14, message = "Telefónne číslo môže mať najviac 20 znakov")
-    @Pattern(
-            regexp = "^\\+[0-9]{1,3}[0-9]{6,14}$",
-            message = "Telefónne číslo musí začínať +, obsahovať kód krajiny a 6–14 číslic"
-    )
+    @Pattern(regexp = "^\\+[0-9]{1,3}[0-9]{6,14}$", message = "Telefónne číslo musí začínať +, obsahovať kód krajiny a 6–14 číslic")
+    @Column(name = "phone")
     private String phone;
 
-    @NotBlank(message = "Pole je povinné")
+    @NotBlank(message = "Pracovná pozícia nesmie byť prázdna")
+    @Column(name = "job_title")
     private String jobTitle;
 
     @NotNull(message = "Pole je povinné")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Salary must be positive")
+    @DecimalMin(value = "0.0", message = "Plat nesmie byť zaporný")
     private Double salary;
 
     @NotBlank(message = "Typ úvazku je povinný")

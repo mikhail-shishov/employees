@@ -29,51 +29,57 @@
 <div class="container">
 
     <div class="header">
-        <h2>Pridať nového zamestnanca</h2>
+        <h2>Pridať/upraviť zamestnanca</h2>
     </div>
 
     <form th:action="@{/employees}" th:object="${employee}" method="post">
+    <input type="hidden" th:field="*{id}">
         <div class="d-flex gap-3">
-        <div class="mb-3">
-            <label for="firstName" class="form-label">Meno</label>
-            <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
-        </div>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">Meno</label>
+                <input type="text" class="form-control" id="firstName" th:field="*{firstName}">
+                <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+            </div>
 
-        <div class="mb-3">
-            <label for="lastName" class="form-label">Priezvisko</label>
-            <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
-        </div>
-        </div>
-
-        <div class="d-flex gap-3">
-        <div class="mb-3">
-            <label class="form-label">Dátum narodenia</label>
-            <input type="date" th:field="*{birthDate}" class="form-control">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Telefónne číslo</label>
-            <input type="text" th:field="*{phone}" class="form-control" placeholder="+xxxxxxxxxx">
-        </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Priezvisko</label>
+                <input type="text" class="form-control" id="lastName" th:field="*{lastName}">
+                <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+            </div>
         </div>
 
         <div class="d-flex gap-3">
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="mail@example.com">
+            <div class="mb-3">
+                <label class="form-label">Dátum narodenia</label>
+                <input type="date" th:field="*{birthDate}" class="form-control">
+                <div class="text-danger" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefónne číslo</label>
+                <input type="text" th:field="*{phone}" class="form-control" placeholder="+xxxxxxxxxx">
+                <div class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label for="jobTitle" class="form-label">Pozícia</label>
-            <select class="form-select" id="jobTitle" th:field="*{jobTitle}">
-                <option th:each="title : ${jobTitles}" th:value="${title}" th:text="${title}"></option>
-            </select>
-        </div>
+        <div class="d-flex gap-3">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="mail@example.com">
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="jobTitle" class="form-label">Pozícia</label>
+                <select class="form-select" id="jobTitle" th:field="*{jobTitle}">
+                    <option th:each="title : ${jobTitles}" th:value="${title}" th:text="${title}"></option>
+                </select>
+            </div>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Typ úvazku</label><br>
-            <div th:each="type : ${workTypes}">
+            <div th:each="type : ${jobWorkTypes}">
                 <input type="radio" th:field="*{fullTime}" th:value="${type}" class="form-check-input">
                 <span th:text="${type}"></span><br>
             </div>
@@ -82,11 +88,15 @@
         <div class="mb-3">
             <label for="salary" class="form-label">Plat (€)</label>
             <input type="number" step="0.01" class="form-control" id="salary" th:field="*{salary}">
+            <div class="text-danger" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
         </div>
 
-        <button type="submit" class="btn btn-lg btn-primary">Uložiť</button>
+        <div class="d-flex">
+            <button type="submit" class="btn btn-lg btn-primary">Uložiť</button>
+            <a href="/employees" class="btn btn-lg">Späť do zoznamu</a>
+        </div>
     </form>
-    
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

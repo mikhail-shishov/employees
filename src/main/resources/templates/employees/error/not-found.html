@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="sk" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>404 - Stránka nenájdená</title>
+    <style>
+        body {
+            padding-top: 50px;
+        }
+
+        .error-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container error-container">
+    <div class="error-code text-danger">404</div>
+    <h1>Stránka nenájdená</h1>
+    <p>Požadovaná stránka neexistuje alebo bola presunutá.</p>
+    <a href="/employees" class="btn btn-primary btn-lg">Späť na zoznam</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>
